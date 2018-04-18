@@ -1,0 +1,17 @@
+ul{
+    list-style:none;
+}
+
+.content-area {
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  .sample-show-hide {
+      opacity:1;
+    transition: all linear 2s;
+  }
+  .sample-show-hide.ng-hide {
+    opacity: 0;
+  }

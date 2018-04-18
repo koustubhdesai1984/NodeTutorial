@@ -1,0 +1,46 @@
+How to Setup ur env
+1. Folder structure
+TS:
+{
+	"compilerOptions":{
+		"outDir":"./dist/js",
+		"rootDir":"./src/js",
+		"watch":true,
+		"alwaysStrict":true	
+	}
+}
+Simple NodeJS Server
+/*
+1. create a static node server
+2. enable sending html and JS file Done
+*/
+
+const http = require('http');
+const fs = require('fs');
+const url = require('url')
+http.createServer(function(req,res){
+	var url = req.url;
+	var filetype = url.match(/\.(html|ico|js)/gi);
+	filetype = filetype.length?filetype[0]:'none';
+	// Is the request a file?
+	switch(filetype){
+		case '.html':
+		console.log('hey in here');
+		fs.readFile('dist'+url,function(err,data){
+			res.writeHead(200,{'Content-Type':'text/html'});
+			res.write(data);
+			res.end();
+		});
+		break;
+		case '.js':
+		fs.readFile('dist'+url,function(err,data){
+			res.writeHead(200,{'Content-Type':'text/javascript'});
+			res.write(data);
+			res.end();
+		});
+		break;
+		case '.ico':
+		break;
+	}
+	
+}).listen('8000');
